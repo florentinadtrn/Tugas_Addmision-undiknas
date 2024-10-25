@@ -1,85 +1,129 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login Page',
-      home: const LoginPage(),
+      title: 'Responsive Layout Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ResponsiveLayout(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class ResponsiveLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         children: [
-        CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://undiknas.ac.id/wp-content/uploads/2023/04/UNDIKNAS-COLOR-768x768.png',
+          // Sidebar
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.blueGrey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Dasboard',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home, color: Colors.white), // Ikon untuk Menu 1
+                    title: Text(
+                      'Home',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings, color: Colors.white), // Ikon untuk Menu 2
+                    title: Text(
+                      'Settings',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.info, color: Colors.white), // Ikon untuk Menu 3
+                    title: Text(
+                      'About',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.person, color: Colors.white), // Ikon untuk Menu 4
+                    title: Text(
+                      'Akun',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {},
+                  ),
+                ],
               ),
-              radius: 50,
             ),
-            const SizedBox(height: 20),
-            // Email TextField
-            TextField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                hintText: 'Email',
-                border: OutlineInputBorder(),
-              ),
+          ),
+          // Main Content Area
+          Expanded(
+            flex: 4,
+            child: Column(
+              children: [
+                // Header
+                Container(
+                  height: 60,
+                  color: Colors.blue,
+                  child: Center(
+                    child: Text(
+                      'Travelease',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                // Content
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.all(16.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Atur jadwal dan nikmati perjalanan wisata anda dengan layanan inklusif dari Travelease',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-
-            // Password TextField
-            TextField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock),
-                hintText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // Login Button
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Login'),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // New Student and Forgot Password Buttons
-            TextButton(
-              onPressed: () {},
-              child: const Text('Mahasiswa Baru? Klik disini'),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Lupa password'),
-            ),
-            const SizedBox(height: 16),
-
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }
